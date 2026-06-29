@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Local Kitsu Lite 使用说明</title>
+    <link rel="icon" href="data:," />
+    <style>
+      :root {
+        --bg: #f8fafc;
+        --panel: #ffffff;
+        --ink: #181d26;
+        --body: #333840;
+        --muted: #646b75;
+        --line: #dddddd;
+        --primary: #181d26;
+        --blue: #254fad;
+        --green: #006400;
+        --amber: #9b6500;
+        --red: #aa2d00;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--body);
+        font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", sans-serif;
+      }
+
+      a {
+        color: var(--blue);
+      }
+
+      code {
+        background: #eef2f7;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        color: var(--ink);
+        padding: 2px 6px;
+      }
+
+      pre {
+        background: var(--primary);
+        border-radius: 8px;
+        color: #fff;
+        overflow-x: auto;
+        padding: 14px 16px;
+      }
+
+      pre code {
+        background: transparent;
+        border: 0;
+        color: inherit;
+        padding: 0;
+      }
+
+      header {
+        background: var(--panel);
+        border-bottom: 1px solid var(--line);
+        padding: 28px 20px;
+      }
+
+      .wrap {
+        margin: 0 auto;
+        max-width: 1120px;
+      }
+
+      .brand {
+        align-items: center;
+        display: flex;
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+
+      .mark {
+        align-items: center;
+        background: var(--primary);
+        border-radius: 8px;
+        color: #fff;
+        display: inline-flex;
+        font-weight: 800;
+        height: 38px;
+        justify-content: center;
+        width: 38px;
+      }
+
+      h1,
+      h2,
+      h3 {
+        color: var(--ink);
+        line-height: 1.2;
+        margin: 0;
+      }
+
+      h1 {
+        font-size: clamp(30px, 5vw, 46px);
+        margin-bottom: 10px;
+      }
+
+      h2 {
+        font-size: 24px;
+        margin-bottom: 12px;
+      }
+
+      h3 {
+        font-size: 17px;
+        margin-bottom: 6px;
+      }
+
+      .lead {
+        color: var(--muted);
+        margin: 0;
+        max-width: 760px;
+      }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 20px;
+      }
+
+      nav a,
+      .pill {
+        background: #eef2f7;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--ink);
+        padding: 6px 10px;
+        text-decoration: none;
+      }
+
+      main {
+        padding: 22px 20px 48px;
+      }
+
+      section {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        margin: 0 auto 18px;
+        max-width: 1120px;
+        padding: 20px;
+      }
+
+      .grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .step {
+        border-left: 3px solid #e0e2e6;
+        padding-left: 12px;
+      }
+
+      .step:nth-child(1) {
+        border-left-color: var(--red);
+      }
+
+      .step:nth-child(2) {
+        border-left-color: var(--blue);
+      }
+
+      .step:nth-child(3) {
+        border-left-color: var(--green);
+      }
+
+      .shot {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        margin-top: 14px;
+        overflow: hidden;
+      }
+
+      .shot img {
+        display: block;
+        height: auto;
+        width: 100%;
+      }
+
+      .caption {
+        background: #f4f6f8;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 13px;
+        padding: 8px 10px;
+      }
+
+      .callout {
+        background: #fff8ef;
+        border: 1px solid #f0d1a3;
+        border-radius: 8px;
+        margin-top: 12px;
+        padding: 10px 12px;
+      }
+
+      ul,
+      ol {
+        margin: 8px 0 0;
+        padding-left: 20px;
+      }
+
+      li {
+        margin: 4px 0;
+      }
+
+      @media (max-width: 760px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        section {
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap">
+        <div class="brand">
+          <span class="mark">K</span>
+          <strong>Local Kitsu Lite</strong>
+        </div>
+        <h1>本地小团队任务管理系统使用说明</h1>
+        <p class="lead">这个系统用于在局域网内管理资产、标签、项目日程和成员认领。数据保存在本地或 NAS 目录，不依赖外部数据库。</p>
+        <nav aria-label="说明导航">
+          <a href="#overview">简介</a>
+          <a href="#features">功能</a>
+          <a href="#start">启动</a>
+          <a href="#assets">资产</a>
+          <a href="#tasks">日程</a>
+          <a href="#team">团队设置</a>
+          <a href="#nas">NAS 存储</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section id="overview">
+        <h2>1. 系统简介</h2>
+        <p>Local Kitsu Lite 是面向小型制作团队的本地资产和任务管理工具。它保留 Kitsu 类工具里最常用的资产表、标签检索、负责人和任务看板，但去掉重型制片流程、复杂权限和外部服务依赖。</p>
+        <p>适合管理角色、场景、道具、参考图、制作任务和小团队每日认领进度。所有元数据写入本地 JSON，上传文件进入本地或 NAS 数据目录。</p>
+      </section>
+
+      <section id="features">
+        <h2>2. 主要功能</h2>
+        <div class="grid">
+          <div class="step">
+            <h3>资产库</h3>
+            <ul>
+              <li>上传图片或参考文件</li>
+              <li>按母层级分类：角色、场景、道具或自定义</li>
+              <li>用标签和搜索快速定位资产</li>
+            </ul>
+          </div>
+          <div class="step">
+            <h3>任务日程</h3>
+            <ul>
+              <li>为资产创建任务</li>
+              <li>按待认领、进行中、待审核、已完成分列</li>
+              <li>成员一键认领任务</li>
+            </ul>
+          </div>
+          <div class="step">
+            <h3>本地部署</h3>
+            <ul>
+              <li>局域网页面访问</li>
+              <li>数据可指向 NAS 挂载目录</li>
+              <li>不依赖云服务或外部数据库</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="start">
+        <h2>3. 启动和访问</h2>
+        <div class="grid">
+          <div class="step">
+            <h3>启动服务</h3>
+            <p>在项目根目录运行：</p>
+            <pre><code>npm start</code></pre>
+          </div>
+          <div class="step">
+            <h3>本机访问</h3>
+            <p>打开浏览器访问 <code>http://localhost:4173</code>。</p>
+          </div>
+          <div class="step">
+            <h3>局域网访问</h3>
+            <p>其他机器访问服务器 IP，例如 <code>http://192.168.1.20:4173</code>。</p>
+          </div>
+        </div>
+        <div class="callout">第一次使用建议先进入“团队”页，添加成员、项目和需要的母层级。</div>
+      </section>
+
+      <section id="assets">
+        <h2>4. 资产管理</h2>
+        <ol>
+          <li>进入“资产”页，使用顶部搜索框按名称、标签或说明筛选。</li>
+          <li>用“全部母层级”和“全部状态”快速缩小范围。</li>
+          <li>点击资产行后，在右侧检查器编辑名称、母层级、状态、负责人、项目、标签和说明。</li>
+        </ol>
+        <div class="shot">
+          <img src="guide-assets/01-assets.png" alt="资产页：左侧资产表格，右侧资产检查器" />
+          <div class="caption">资产页保留表格密度，右侧用于查看预览和修改元数据。</div>
+        </div>
+
+        <h3 style="margin-top: 18px;">添加资产</h3>
+        <ol>
+          <li>点击“添加资产”。</li>
+          <li>填写名称、母层级、项目、负责人、状态和标签。</li>
+          <li>可上传图片或其他参考文件；文件会进入当前数据目录的 <code>uploads/</code>。</li>
+        </ol>
+        <div class="shot">
+          <img src="guide-assets/02-add-asset.png" alt="添加资产弹窗：填写资产信息并上传文件" />
+          <div class="caption">标签支持用空格、英文逗号、中文逗号或顿号分隔。</div>
+        </div>
+      </section>
+
+      <section id="tasks">
+        <h2>5. 日程和任务认领</h2>
+        <ol>
+          <li>进入“日程”页查看任务看板。</li>
+          <li>未分配任务会显示“认领”，当前人员点击后自动成为负责人，并进入“进行中”。</li>
+          <li>任务状态可以直接在卡片里的下拉框切换：待认领、进行中、待审核、已完成。</li>
+        </ol>
+        <div class="shot">
+          <img src="guide-assets/03-schedule.png" alt="日程页：任务按状态分列显示" />
+          <div class="caption">日程页按状态分列，适合小团队每天查看谁在做什么。</div>
+        </div>
+      </section>
+
+      <section id="team">
+        <h2>6. 团队、项目和母层级</h2>
+        <ol>
+          <li>进入“团队”页添加成员，成员会出现在负责人和当前人员下拉框中。</li>
+          <li>添加项目后，资产和任务都可以归入对应项目。</li>
+          <li>添加母层级用于定义资产大类，例如角色、场景、道具、车辆、特效。</li>
+        </ol>
+        <div class="shot">
+          <img src="guide-assets/04-team.png" alt="团队页：成员、母层级、项目和存储状态" />
+          <div class="caption">团队页显示存储状态和上传上限，不展示本机绝对路径。</div>
+        </div>
+      </section>
+
+      <section id="nas">
+        <h2>7. NAS 存储设置</h2>
+        <p>默认数据保存在项目内的 <code>data/</code>。上线给团队使用时，建议把数据目录指向 NAS 挂载路径：</p>
+        <pre><code>LOCAL_KITSU_DATA_DIR=/Volumes/YourNAS/studio-board npm start</code></pre>
+        <p>目录结构如下：</p>
+        <pre><code>studio-board/
+  db.json
+  uploads/</code></pre>
+        <div class="callout">不要把 <code>data/</code>、<code>uploads/</code> 或截图输出提交到 GitHub；它们是运行数据。</div>
+      </section>
+    </main>
+  </body>
+</html>

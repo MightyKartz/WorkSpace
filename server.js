@@ -70,6 +70,9 @@ function createRuntime(options) {
     dataDir,
     dbPath: path.join(dataDir, "db.json"),
     uploadDir: path.join(dataDir, "uploads"),
+    storageLabel: options.dataDir || process.env.LOCAL_KITSU_DATA_DIR
+      ? "自定义数据目录已启用"
+      : "默认本地数据目录",
     maxBodyBytes: Math.max(1, maxUploadMb) * 1024 * 1024,
     writeQueue: Promise.resolve()
   };
@@ -388,8 +391,7 @@ function withRuntimeInfo(db, runtime) {
   return {
     ...db,
     runtime: {
-      dataDir: runtime.dataDir,
-      uploadDir: runtime.uploadDir,
+      storageLabel: runtime.storageLabel,
       maxUploadMb: Math.round(runtime.maxBodyBytes / 1024 / 1024)
     }
   };

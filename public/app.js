@@ -309,7 +309,8 @@ function renderTeam() {
         </div>
         <div class="settings-row">
           <strong>存储</strong>
-          <div class="quiet">${esc(ui.data.runtime.dataDir)}</div>
+          <div class="quiet">${esc(ui.data.runtime.storageLabel || "数据目录已配置")}</div>
+          <div class="quiet">完整路径已隐藏，避免在局域网页面暴露本机信息。</div>
           <div class="quiet">上传上限 ${esc(ui.data.runtime.maxUploadMb)} MB</div>
         </div>
       </div>

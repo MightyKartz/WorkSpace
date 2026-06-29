@@ -25,6 +25,9 @@ test("stores an uploaded asset and serves it back", async () => {
     assert.equal(created.assets.length, 1);
     assert.deepEqual(created.assets[0].tags, ["老人", "hero"]);
     assert.equal(created.assets[0].category, "角色");
+    assert.equal(created.runtime.dataDir, undefined);
+    assert.equal(created.runtime.uploadDir, undefined);
+    assert.equal(created.runtime.storageLabel, "自定义数据目录已启用");
 
     const uploaded = await fetch(`${baseUrl}${created.assets[0].file.url}`);
     assert.equal(await uploaded.text(), "Hello");
