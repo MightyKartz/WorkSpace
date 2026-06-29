@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>本地制作板</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark">ST</span>
+        <div>
+          <strong id="studioName">本地制作板</strong>
+          <small>LAN asset board</small>
+        </div>
+      </div>
+      <nav class="tabs" aria-label="主视图">
+        <button type="button" data-view="assets" aria-selected="true">资产</button>
+        <button type="button" data-view="schedule">日程</button>
+        <button type="button" data-view="team">团队</button>
+      </nav>
+      <div class="top-controls">
+        <select id="projectFilter" aria-label="项目"></select>
+        <select id="currentPerson" aria-label="当前人员"></select>
+      </div>
+    </header>
+
+    <main id="app" class="app-shell" aria-live="polite"></main>
+
+    <dialog id="modal" class="modal"></dialog>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
